@@ -1,0 +1,7 @@
+label + input{
+    padding: 20px;
+}
+
+input + input[type="submit"]{
+    padding: 20px;
+}
