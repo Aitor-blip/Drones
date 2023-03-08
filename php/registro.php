@@ -55,9 +55,18 @@ require_once '../php/bd/metodosBd.php';
         if($dni==null || $apodo == null || $nombre==null || $apellidos==null|| $email == null || $password==null) {
             echo "Fallo al insertar los datos";
         }else{
+           
             addUser($dni,$apodo,$nombre,$apellidos,$email,$password);
+            $id_usr = getIdUsuarioFromUsuario($apodo);
+            $id_rol = getIdRolFromUsuario($id_usr);
+            if($id_rol==null){
+                $id_rol=4;
+            }
+            addUserRolData($id_usr,$id_rol);
             header("location:index.php");
         }
+
+
 
     }
     ?>

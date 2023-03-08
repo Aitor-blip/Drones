@@ -1,7 +1,20 @@
-label + input{
-    padding: 20px;
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-input + input[type="submit"]{
-    padding: 20px;
+
+.botones{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
+
+.botones > input{
+    margin:20px;
+}
+

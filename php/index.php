@@ -16,12 +16,12 @@ require_once '../php/bd/metodosBd.php';
     <form action="index.php" method="POST">
         <section class="container">
            <label>Nombre:</label>
-        <input type="text" name="nombre" placeholder="Introduce tu nombre" required>
-        <label>Password:</label>
-        <input type="password" name="password" placeholder="Introduce tu password" required>
-        <section class="botones">
-           <input type="submit" name="login" value="Login"> 
-           <input type="submit" name="registrarse" value="Registrar"> 
+            <input type="text" name="nombre" placeholder="Introduce tu nombre" required>
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="Introduce tu password" required>
+            <section class="botones">
+                <input type="submit" name="login" value="Login"> 
+                <input type="submit" name="registrarse" value="Registrar"> 
         </section> 
         </section>
         
@@ -34,18 +34,26 @@ require_once '../php/bd/metodosBd.php';
         $nombre = $_POST['nombre'];
         $password = $_POST['password'];
 
+
         $nombreBD = getNombreFromUsuario($nombre);
         $passwordBd = getPasswordFromUsuario($password);
 
-        $id_usr = getIdUsuarioFromUsuario($nombreBD);
-        $id_rol = getIdRolFromUsuario($id_usr);
+     
 
        
+        if($nombreBD==null || $passwordBd==null){
+            echo "No existe el apodo del usuario en la base de datos<br>";
+        }
+
 
         if($nombre == $nombreBD && $password == $passwordBd){
             
-            echo $nombreBD;
-            echo $passwordBd;
+            $id_usr = getIdUsuarioFromUsuario($nombreBD);
+            $arrayIdRoles = getIdrolesFromIdUsuario($id_usr);
+
+            $rolUltimo = endKey($arrayIdRoles);
+
+            echo "Ultimo Rol".$rolUltimo;
            
             $_SESSION['nombre'] = $nombreBD;
             $_SESSION['idUsuario'] = $id_usr;
@@ -55,19 +63,29 @@ require_once '../php/bd/metodosBd.php';
             if($id_rol==null){
                 $id_rol=4;
             }
-            $_SESSION['idRol'] = $id_rol;
+
+            $_SESSION['idRol'] = $rolUltimo;
 
             header("location:menu.php"); 
         }
 
-        if($nombreBD==null || $passwordBd==null){
-            echo "No existe el apodo del usuario en la base de datos<br>";
-        }
+       
     }
 
     if(isset($_POST['registrarse'])){
         header("location:registro.php"); 
     }
+
+    // Returns the key at the end of the array
+    function endKey( $array ){
+
+    //Aquí utilizamos end() para poner el puntero
+    //en el último elemento, no para devolver su valor
+    end( $array );
+
+    return key( $array );
+
+}
 
     ?>
     
