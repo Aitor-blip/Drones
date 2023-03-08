@@ -321,7 +321,34 @@ function getDrones() {
     return @$array;
 }
 
+function removeDron($idDron) {
+    $conexion = conexion();
+    $correcto = true;
+    //Primero hacemos la insercion de la tabla carrera 
 
+    $instruccion1 = "delete from dron where id_dron = $idDron";
+    if (@mysqli_query($conexion, $instruccion1)) {
+        
+    } else {
+        $correcto = false;
+    }
 
+    mysqli_close($conexion);
+    return $correcto;
+}
+
+function addDron($nombreDron,$marcaDron) {
+    $conexion = conexion();
+    $correcto = true;
+    //Primero hacemos la insercion de la tabla carrera 
+    $instruccion1 = "insert into dron (nombre_dron,marca_dron) values ('$nombreDron','$marcaDron')";
+    if (@mysqli_query($conexion, $instruccion1)) {
+        
+    } else {
+        $correcto = false;
+    }
+    mysqli_close($conexion);
+    return $correcto;
+}
 
 ?>

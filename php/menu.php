@@ -49,6 +49,16 @@ function mostrarMenuPorIdRol($idRol){
         header('location:addTrabajoAgricultor.php');
     }
 
+    //Usuario Piloto
+
+    if(isset($_POST['gestionDrones'])){
+        header('location:addDronPiloto.php');
+    }
+
+    if(isset($_POST['verTrabajos'])){
+        header('location:verTrabajos.php');
+    }
+
     //Usuario Invitado
     if(isset($_POST['gestionUsuarios'])){
         header("location: gestionUsuariosInvitado.php");
