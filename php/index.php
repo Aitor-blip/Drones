@@ -49,11 +49,7 @@ require_once '../php/bd/metodosBd.php';
         if($nombre == $nombreBD && $password == $passwordBd){
             
             $id_usr = getIdUsuarioFromUsuario($nombreBD);
-            $arrayIdRoles = getIdrolesFromIdUsuario($id_usr);
-
-            $rolUltimo = endKey($arrayIdRoles);
-
-            echo "Ultimo Rol".$rolUltimo;
+            $id_rol = getIdRolFromUsuario($id_usr);
            
             $_SESSION['nombre'] = $nombreBD;
             $_SESSION['idUsuario'] = $id_usr;
@@ -64,7 +60,7 @@ require_once '../php/bd/metodosBd.php';
                 $id_rol=4;
             }
 
-            $_SESSION['idRol'] = $rolUltimo;
+            $_SESSION['idRol'] = $id_rol;
 
             header("location:menu.php"); 
         }
