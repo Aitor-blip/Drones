@@ -54,7 +54,9 @@ require_once '../php/inicio.php';
         ?>
         </select>
         <br>
-        <input type="submit" name="eliminarDron" value="Borrar">
+        <input type="submit" name="eliminarDron" value="Borrar">´
+        <input type="submit" name="menu" value="Volver al menu">
+
 </form>
 
 <?php
@@ -67,6 +69,10 @@ require_once '../php/inicio.php';
                 header('location:menu.php');
             }
 
+        }
+
+        if(isset($_POST['menu'])){
+            header('location:menu.php');
         }
 
 ?>
