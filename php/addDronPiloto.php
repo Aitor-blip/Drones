@@ -13,6 +13,14 @@ require_once '../php/inicio.php';
     <label for="marca">Marca :</label>
     <input type="text" name="marca" required>
     <br>
+   <p>Usuario :<select name='users'></p>";
+   <?php
+    $arrayUsers = getUserNames();
+    foreach ($arrayUsers as $user) {
+        echo "<option value='".$user['id_usr']."'>".$user['username']."</option>";
+    }
+    ?>
+    </select>
     <section class="botones">
         <input type="submit" name="addDron" value="Añadir">
         <input type="submit" name="cancelar" value="Cancelar">
@@ -28,7 +36,7 @@ require_once '../php/inicio.php';
             echo "La marca del dron tiene que ser mayor a cero caracteres";
         }else if($_POST['nombre'] != "" && $_POST['marca'] != ""){
             //Añadimos el dron a la bd
-            addDron($_POST['nombre'],$_POST['marca']);
+            addDron($_POST['users'],$_POST['nombre'],$_POST['marca']);
         }else{
             echo "El nombre del dron y la marca del dron tienen que ser mayor a cero caracteres";
         }

@@ -13,7 +13,7 @@ require_once '../php/inicio.php';
         <?php
         $arrayParcelas = getParcelas();
         foreach ($arrayParcelas as $parcela) {
-            echo "<option value='".$parcela['id_parcela']."'>".$parcela['muncipio']."</option>";
+            echo "<option value='".$parcela['id_parcela']."'>".$parcela['nparcela']."</option>";
         }
         ?>
     </select>
@@ -23,7 +23,7 @@ require_once '../php/inicio.php';
         <?php
         $arrayTareas = getTareas();
         foreach ($arrayTareas as $tarea) {
-            echo "<option value='".$tarea['id_tarea']."'>".$parcela['nombre_tarea']."</option>";
+            echo "<option value='".$tarea['id_tarea']."'>".$tarea['nombre_tarea']."</option>";
         }
         ?>
     </select>
@@ -43,7 +43,7 @@ require_once '../php/inicio.php';
         <?php
         $arrayDrones = getDrones();
         foreach ($arrayDrones as $dron) {
-            echo "<option value='".$dron['id_dron']."'>".$piloto['nombre_dron']."</option>";
+            echo "<option value='".$dron['id_dron']."'>".$dron['nombre_dron']."</option>";
         }
         ?>
     </select>
@@ -54,30 +54,29 @@ require_once '../php/inicio.php';
 </form>
 
 <?php
-    if(isset($_POST['addTrabajo'])){
-        $cont =0;
-        if(@$_POST['parcelas'] == null){
-            echo "No existen parcelas";
-        }else if(@$_POST['tareas'] == null){
-            echo "No existen tareas en la bd";
-        }else if(@$_POST['pilotos'] == null){
-            echo "No existen tareas en la bd";
-        }else if(@$_POST['parcelas'] == null && @$_POST['tareas'] == null){
-            echo "No existen parcelas y tareas en la bd";
-        }else if(@$_POST['parcelas'] == null && @$_POST['tareas'] == null && @$_POST['pilotos'] == null){
-            echo "No existen parcelas,tareas y pilotos en la bd";
-        }else if(@$_POST['parcelas'] == null && @$_POST['tareas'] == null && @$_POST['pilotos'] == null && @$_POST['drones'] == null){
-            echo "No existen parcelas,tareas y pilotos en la bd";
-        }else if(@$_POST['nombre']==""){
-            $nombre = "Sin nombre".$cont;
-            $cont++;
-            echo "Se debe escribir el nombre de trabajo";
-        }else if(@$_POST['parcelas'] != null && @$_POST['tareas'] != null && @$_POST['pilotos'] != null && @$_POST['drones'] != null){
-            echo "Existen parcelas,tareas y pilotos";
-        }else{
-            echo "No hay ningun dato insertado falta todos los campos del formulario";
-        }
+if (isset($_POST['addTrabajo'])) {
+    $cont =0;
+    if (@$_POST['parcelas'] == null) {
+        echo "No existen parcelas";
+    } elseif (@$_POST['tareas'] == null) {
+        echo "No existen tareas en la bd";
+    } elseif(@$_POST['drones']== null){
+        echo "No hay drones en la bd";
+    }elseif (@$_POST['pilotos'] == null) {
+        echo "No existen tareas en la bd";
+    } elseif (@$_POST['parcelas'] == null && @$_POST['tareas'] == null) {
+        echo "No existen parcelas y tareas en la bd";
+    } elseif (@$_POST['parcelas'] == null && @$_POST['tareas'] == null && @$_POST['pilotos'] == null) {
+        echo "No existen parcelas,tareas y pilotos en la bd";
+    } elseif (@$_POST['parcelas'] == null && @$_POST['tareas'] == null && @$_POST['pilotos'] == null && @$_POST['drones'] == null) {
+        echo "No existen parcelas,tareas y pilotos en la bd";
+    } elseif (@$_POST['nombre']=="") {
+        $nombre = "Sin nombre".$cont;
+        echo "Se debe escribir el nombre de trabajo";
+    } else {
+        addTrabajo($_POST['parcelas'], $_POST['pilotos'], $_POST['tareas'], $_POST['drones'], $_POST['nombre']);
     }
+}
 
     if(isset($_POST['cancelar'])){
         header('location:menu.php');

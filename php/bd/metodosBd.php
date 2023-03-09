@@ -293,6 +293,19 @@ function getTareas() {
     return @$array;
 }
 
+
+function getTrabajos() {
+    $array = array();
+    $conexion = conexion();
+    $instruccion1 = "select * from trabajo";
+    $resultado = mysqli_query($conexion, $instruccion1);
+    while ($fila = mysqli_fetch_array($resultado)) {
+        array_push($array, $fila);
+    }
+    mysqli_close($conexion);
+    return @$array;
+}
+
 function getPilotoFromIdRol3($id_rol) {
     $array = array();
     $conexion = conexion();
@@ -337,11 +350,11 @@ function removeDron($idDron) {
     return $correcto;
 }
 
-function addDron($nombreDron,$marcaDron) {
+function addDron($id_usr,$nombreDron,$marcaDron) {
     $conexion = conexion();
     $correcto = true;
     //Primero hacemos la insercion de la tabla carrera 
-    $instruccion1 = "insert into dron (nombre_dron,marca_dron) values ('$nombreDron','$marcaDron')";
+    $instruccion1 = "insert into dron (id_usr,nombre_dron,marca_dron) values ($id_usr,'$nombreDron','$marcaDron')";
     if (@mysqli_query($conexion, $instruccion1)) {
         
     } else {
@@ -349,6 +362,117 @@ function addDron($nombreDron,$marcaDron) {
     }
     mysqli_close($conexion);
     return $correcto;
+}
+
+//id_parcela	id_tarea	id_piloto	id_dron	nombre_Trabajo
+
+function addTrabajo($id_parcela,$id_tarea,$id_piloto,$id_dron,$nombre) {
+    $conexion = conexion();
+    $correcto = true;
+    //Primero hacemos la insercion de la tabla carrera 
+    $instruccion1 = "insert into trabajo (id_parcela,id_tarea,id_piloto,id_dron,nombre_Trabajo) values ($id_parcela,$id_tarea,$id_piloto,$id_dron,'$nombre')";
+    echo $instruccion1;
+    if (@mysqli_query($conexion, $instruccion1)) {
+        
+    } else {
+        $correcto = false;
+    }
+    mysqli_close($conexion);
+    return $correcto;
+}
+
+function insertarIdParcelaEnTrabajo($idParcela){
+    $conexion = conexion();
+    $correcto = true;
+    //Primero hacemos la insercion de la tabla carrera 
+    $instruccion1 = "insert into trabajo (id_parcela) values ($idParcela)";
+    echo $instruccion1;
+    if (@mysqli_query($conexion, $instruccion1)) {
+        
+    } else {
+        $correcto = false;
+    }
+    mysqli_close($conexion);
+    return $correcto;  
+}
+
+function insertarIdParcelaEnRuta($idParcela){
+    $conexion = conexion();
+    $correcto = true;
+    //Primero hacemos la insercion de la tabla carrera 
+    $instruccion1 = "insert into ruta (id_parcela) values ($idParcela)";
+    echo $instruccion1;
+    if (@mysqli_query($conexion, $instruccion1)) {
+        
+    } else {
+        $correcto = false;
+    }
+    mysqli_close($conexion);
+    return $correcto;  
+}
+
+function insertarContenedorParcelaIdParcela($idParcela){
+    $conexion = conexion();
+    $correcto = true;
+    //Primero hacemos la insercion de la tabla carrera 
+    $instruccion1 = "insert into contenedorparcela (id_parcela) values ($idParcela)";
+    echo $instruccion1;
+    if (@mysqli_query($conexion, $instruccion1)) {
+        
+    } else {
+        $correcto = false;
+    }
+    mysqli_close($conexion);
+    return $correcto;  
+}
+
+function insertarParcela($n_parcela,$municipio,$provincia,$npoligono,$id_usr){
+    $conexion = conexion();
+    $correcto = true;
+    //Primero hacemos la insercion de la tabla carrera 
+    $instruccion1 = "insert into parcelas (nparcela,municipio,provincia,npoligono,id_usr) values ($n_parcela,$municipio,$provincia,$npoligono,$id_usr)";
+    if (@mysqli_query($conexion, $instruccion1)) {
+        
+    } else {
+        $correcto = false;
+    }
+    mysqli_close($conexion);
+    return $correcto;  
+}
+
+function insertarCoodenadasTablaContenedorParcela($idParcela,$longitud,$latitud){
+    $conexion = conexion();
+    $correcto = true;
+    //Primero hacemos la insercion de la tabla carrera 
+    $instruccion1 = "insert into contenedorparcela (id_parcela,x,y) values ($idParcela,$longitud,$latitud)";
+    if (@mysqli_query($conexion, $instruccion1)) {
+        
+    } else {
+        $correcto = false;
+    }
+    mysqli_close($conexion);
+    return $correcto;  
+}
+
+function getIdParcelaFromParcela($idParcela) {
+    $conexion = conexion();
+    $instruccion1 = "select id_parcela from parcelas where id_parcela = $idParcela";
+    $resultado = mysqli_query($conexion, $instruccion1);
+    $fila = mysqli_fetch_array($resultado);
+    mysqli_close($conexion);
+    return @$fila['id_parcela'];
+}
+
+function getAllIdParcelaFromParcelas() {
+    $array = array();
+    $conexion = conexion();
+    $instruccion1 = "select * from parcelas";
+    $resultado = mysqli_query($conexion, $instruccion1);
+    while ($fila = mysqli_fetch_array($resultado)) {
+        array_push($array, $fila);
+    }
+    mysqli_close($conexion);
+    return @$array;
 }
 
 ?>
