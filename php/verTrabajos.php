@@ -17,11 +17,12 @@ require_once '../php/inicio.php';
     </thead>
     <tbody>
         <tr>
+            <form action="verTrabajos.php" method="POST">
+                <input type="submit" name="ejecutar" value="Ejecutar Trabajo">
+            </form>
             <?php
             $arrayTrabajos = getTrabajos();
-            if($arrayTrabajos == null){
-                echo "No hay Trabajos";
-            }
+
             foreach($arrayTrabajos as $trabajo){
                 echo "<td>".$trabajo['id_trabajo']."</td>";
                 echo "<td>".$trabajo['id_dron']."</td>";
@@ -29,7 +30,23 @@ require_once '../php/inicio.php';
                 echo "<td>".$trabajo['id_piloto']."</td>";
                 echo "<td>".$trabajo['id_tarea']."</td>";
                 echo "<td>".$trabajo['nombre_Trabajo']."</td>";
-            }
+                $_SESSION['idTrabajo'] = $trabajo['id_trabajo'];
+              }
+
+              if(isset($_POST['ejecutar'])){
+                 if(@$_SESSION['idTrabajo'] == null || $arrayTrabajos == null){
+                    echo "<br>No hay trabajos";          
+                }else{
+                    $eliminada = removeTrabajo($_SESSION['idTrabajo']);
+                    if($eliminada){
+                        echo "Tarea Ejecutada";
+                    }else{
+                        echo "Tarea no ejecutada";
+                    }  
+              }
+              }
+
+             
             ?>
         </tr>
     </tbody>

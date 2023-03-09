@@ -74,7 +74,7 @@ if (isset($_POST['addTrabajo'])) {
         $nombre = "Sin nombre".$cont;
         echo "Se debe escribir el nombre de trabajo";
     } else {
-        addTrabajo($_POST['parcelas'], $_POST['pilotos'], $_POST['tareas'], $_POST['drones'], $_POST['nombre']);
+        addTrabajo($_POST['parcelas'], $_POST['tareas'], $_POST['pilotos'], $_POST['drones'], $_POST['nombre']);
     }
 }
 

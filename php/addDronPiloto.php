@@ -13,7 +13,7 @@ require_once '../php/inicio.php';
     <label for="marca">Marca :</label>
     <input type="text" name="marca" required>
     <br>
-   <p>Usuario :<select name='users'></p>";
+   <p>Piloto :<select name='users'></p>";
    <?php
     $arrayUsers = getUserNames();
     foreach ($arrayUsers as $user) {

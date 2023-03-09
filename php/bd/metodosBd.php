@@ -371,12 +371,28 @@ function addTrabajo($id_parcela,$id_tarea,$id_piloto,$id_dron,$nombre) {
     $correcto = true;
     //Primero hacemos la insercion de la tabla carrera 
     $instruccion1 = "insert into trabajo (id_parcela,id_tarea,id_piloto,id_dron,nombre_Trabajo) values ($id_parcela,$id_tarea,$id_piloto,$id_dron,'$nombre')";
-    echo $instruccion1;
     if (@mysqli_query($conexion, $instruccion1)) {
         
     } else {
         $correcto = false;
     }
+    mysqli_close($conexion);
+    return $correcto;
+}
+
+
+function removeTrabajo($idTrabajo){
+    $conexion = conexion();
+    $correcto = true;
+    //Primero hacemos la insercion de la tabla carrera 
+
+    $instruccion1 = "delete from trabajo where id_trabajo = $idTrabajo";
+    if (@mysqli_query($conexion, $instruccion1)) {
+        
+    } else {
+        $correcto = false;
+    }
+
     mysqli_close($conexion);
     return $correcto;
 }

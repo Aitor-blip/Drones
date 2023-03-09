@@ -84,8 +84,8 @@ if(isset($_POST['buscar'])){
 }
 
 if(isset($_POST['asignarRol'])){
-    echo $_POST['users'];
-    echo $_POST['roles'];
+/*     echo $_POST['users'];
+    echo $_POST['roles']; */
     addRol($_POST['users'],$_POST['roles']);
 }
 

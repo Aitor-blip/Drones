@@ -12,7 +12,7 @@ require_once '../php/bd/metodosBd.php';
     <link rel="stylesheet" href="../css/Estilos.css">
 </head>
 <body>
-    <h1 style="text-align: center;font-size: 40px; font-weight: 700;">LOGIN DE USUARIO</h1>
+    <h1 style="text-align: center;font-size: 40px; font-weight: 700;">REGISTRO DE USUARIO</h1>
     <form action="registro.php" method="POST">
         <section class="container">
             <label>Dni:</label>
